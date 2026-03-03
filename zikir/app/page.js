@@ -15,9 +15,9 @@ export default function Home() {
             <Minus size={32} strokeWidth={2.5} className="size-7" />
           </Button>
 
-          <h2 className="w-32 h-32 -mx-4 rounded-full z-10 bg-accent flex justify-center items-center text-6xl">
+          <h2 className="w-32 h-32 -mx-4 rounded-full z-10 bg-accent font-orbitron font-medium flex justify-center items-center text-6xl">
             {" "}
-            33
+            34
           </h2>
 
           <Button className="rounded-full cursor-pointer bg-primary w-16 h-16">
