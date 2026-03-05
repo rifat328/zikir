@@ -33,7 +33,7 @@ export default function Home() {
 
           <h2
             key={count}
-            className="w-32 h-32 -mx-4 rounded-full z-10 bg-accent font-orbitron font-medium flex justify-center items-center text-6xl transition-all duration-100 animate-[wiggle_0.1s_ease-in-out]"
+            className="w-32 h-32 -mx-4 rounded-full z-10 bg-accent font-orbitron font-medium flex justify-center items-center text-6xl animate-pop"
           >
             {count}
           </h2>
@@ -48,17 +48,22 @@ export default function Home() {
       </div>
 
       <div className="zikirs flex justify-around">
-        <Zikir count={0} name="SubhanAllah" isActive={isActive} onToggle />
-        <Zikir count={0} name="Alhamdulillah" isActive={isActive} onToggle />
+        <Zikir count={count} name="SubhanAllah" isActive={isActive} onToggle />
         <Zikir
-          count={0}
+          count={count}
+          name="Alhamdulillah"
+          isActive={isActive}
+          onToggle
+        />
+        <Zikir
+          count={count}
           name="La ilaha illallah"
           isActive={isActive}
           onToggle
         />
-        <Zikir count={0} name="Allahu Akbar" isActive={isActive} onToggle />
+        <Zikir count={count} name="Allahu Akbar" isActive={isActive} onToggle />
       </div>
-      <div className="hadith mt-12 mx-auto flex flex-col justify-center items-center text-center max-w-[75ch] px-4">
+      <div className="hadith mt-12 mx-auto flex flex-col justify-center items-center text-center max-w-[75ch] lg:max-w-[45%] px-4">
         <h2 className="font-bold text-2xl mb-4">The Hadith</h2>
         <p className="text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed text-muted-foreground">
           Umm hani Bint abu talib , The sister of Ali and the cousin of the
