@@ -5,42 +5,40 @@ const Zikir = ({ name, count, isActive, onToggle }) => {
     <div
       onClick={() => onToggle(name)}
       className={cn(
-        "flex items-center justify-between p-4 mb-2 rounded-xl cursor-pointer transition-all border-2",
+        "flex flex-col p-4 mb-2 rounded-4xl cursor-pointer transition-all border-2 ", // Changed to flex-col
         isActive
-          ? "border-primary bg-primary/10 shadow-md"
+          ? "border-green-300 bg-primary/10 shadow-md"
           : "border-transparent bg-secondary/50 opacity-60 hover:opacity-100",
       )}
     >
-      <div className="flex flex-col">
-        <span
-          className={cn(
-            "font-semibold transition-colors",
-            isActive ? "text-primary" : "text-muted-foreground",
-          )}
-        >
-          {name}
-        </span>
-        {isActive && (
-          <span className="text-xs text-primary/70 animate-pulse">
-            Currently Syncing...
+      {/* Top Row: Count and Name */}
+      <div className="flex items-center justify-between w-full">
+        <div className="flex items-center gap-3">
+          <h3 className="text-2xl font-mono font-bold w-12 h-12 rounded-full border-2 flex items-center justify-center">
+            {count}
+          </h3>
+
+          <span
+            className={cn(
+              "font-semibold transition-colors",
+              isActive ? "text-primary" : "text-muted-foreground",
+            )}
+          >
+            {name}
           </span>
-        )}
+        </div>
       </div>
 
-      <div className="flex items-center gap-3">
-        <span className="text-2xl font-mono font-bold tracking-tighter">
-          {count}
-        </span>
-        {/* Visual indicator for active state */}
-        <div
-          className={cn(
-            "w-3 h-3 rounded-full",
-            isActive
-              ? "bg-primary shadow-[0_0_8px_rgba(var(--primary),0.6)]"
-              : "bg-muted",
-          )}
-        />
-      </div>
+      {/* Bottom Row: Syncing Message */}
+      {isActive && (
+        <div className="mt-1 ">
+          {" "}
+          {/* Aligns it under the name, past the count circle */}
+          <p className="text-[9px] uppercase tracking-widest text-primary/70 animate-pulse">
+            ● Syncing with main counter
+          </p>
+        </div>
+      )}
     </div>
   );
 };
