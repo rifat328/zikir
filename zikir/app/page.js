@@ -10,12 +10,30 @@ import { useWindowSize } from "react-use";
 export default function Home() {
   const [lang, setLang] = useState("en");
   const t = translations[lang];
-  const [count, setCount] = useState({
-    SubhanAllah: 0,
-    Alhamdulillah: 0,
-    "La ilaha illallah": 0,
-    "Allahu Akbar": 0,
+  const [count, setCount] = useState(() => {
+    if (typeof window !== undefined) {
+      const saved = localStorage.getItem("zikir-counts");
+      return saved
+        ? JSON.parse(saved)
+        : {
+            SubhanAllah: 0,
+            Alhamdulillah: 0,
+            "La ilaha illallah": 0,
+            "Allahu Akbar": 0,
+          };
+    }
+    //default for server-side rendering
+    return {
+      SubhanAllah: 0,
+      Alhamdulillah: 0,
+      "La ilaha illallah": 0,
+      "Allahu Akbar": 0,
+    };
   });
+  //save to localStorage whenEver count changes:
+  useEffect(() => {
+    localStorage.setItem("zikir-counts", JSON.stringify(count));
+  }, [count]);
   const [activeZikirs, setActiveZikirs] = useState([]);
   const decrement = () => {
     setCount((prevCount) => {
@@ -130,21 +148,10 @@ export default function Home() {
       <div className="hadith mt-12 mx-auto flex flex-col justify-center items-center text-center max-w-[75ch] lg:max-w-[45%] px-4">
         <h2 className="font-bold text-2xl mb-4">{t.hadithTitle}</h2>
         <p className="text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed text-muted-foreground">
-          Umm hani Bint abu talib , The sister of Ali and the cousin of the
-          Prophet (SA), Came to him and said O Prophet of Allah, Now I am Old
-          And Weak, tell me about something I can say or do while sitting down.
-          <span className="font-bold">
-            The Phropet told her, Say 'SubhanAllah' 100 times: It is equivalent
-            to freeing 100 slaves from the offspring of Isma'il. Say
-            'Alhamdulillah' 100 times: It is equivalent to 100 horses, saddled
-            and bridled, carrying [fighters] in the way of Allah. Say 'Allahu
-            Akbar' 100 times: It is equivalent to 100 sacrificial camels,
-            decorated and accepted [by Allah]. Say 'La ilaha illallah' 100
-            times: it fills what is between the heavens and the earth, and on
-            that day, no one will have a better deed raised for them than yours,
-            except for one who does the same as you.'"
-          </span>
-          <i>— (Source: Musnad Ahmad and Silsila al-Sahiha by Al-Albani)</i>
+          {t.hadithIntro}
+          <br />
+          <span className="font-bold block mt-2">{t.hadithBody}</span>
+          <i className="block mt-4 opacity-70">{t.hadithSource}</i>
         </p>
       </div>
     </main>
@@ -164,3 +171,25 @@ export default function Home() {
 // Say 'La ilaha illallah' 100 times: (The narrator said: I think he said) it fills what is between the heavens and the earth, and on that day, no one will have a better deed raised for them than yours, except for one who does the same as you.'"
 
 // — (Source: Musnad Ahmad and Silsila al-Sahiha by Al-Albani)
+
+{
+  /* <div className="hadith mt-12 mx-auto flex flex-col justify-center items-center text-center max-w-[75ch] lg:max-w-[45%] px-4">
+  <h2 className="font-bold text-2xl mb-4">{t.hadithTitle}</h2>
+  <p className="text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed text-muted-foreground">
+    Umm hani Bint abu talib , The sister of Ali and the cousin of the Prophet
+    (SA), Came to him and said O Prophet of Allah, Now I am Old And Weak, tell
+    me about something I can say or do while sitting down.
+    <span className="font-bold">
+      The Phropet told her, Say 'SubhanAllah' 100 times: It is equivalent to
+      freeing 100 slaves from the offspring of Isma'il. Say 'Alhamdulillah' 100
+      times: It is equivalent to 100 horses, saddled and bridled, carrying
+      [fighters] in the way of Allah. Say 'Allahu Akbar' 100 times: It is
+      equivalent to 100 sacrificial camels, decorated and accepted [by Allah].
+      Say 'La ilaha illallah' 100 times: it fills what is between the heavens
+      and the earth, and on that day, no one will have a better deed raised for
+      them than yours, except for one who does the same as you.'"
+    </span>
+    <i>— (Source: Musnad Ahmad and Silsila al-Sahiha by Al-Albani)</i>
+  </p>
+</div>; */
+}
