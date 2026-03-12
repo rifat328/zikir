@@ -38,6 +38,22 @@ export default function Home() {
     }
   }, [count, isLoaded]);
 
+  // Save Language preferance on to local Storage
+  const [isLangLoaded, setIsLangLoaded] = useState(false);
+  useEffect(() => {
+    const savedLang = localStorage.getItem("zikir-lang");
+    if (savedLang && translations[savedLang]) {
+      setLang(savedLang);
+    }
+    setIsLangLoaded(true);
+  }, []);
+  // SAVE Language whenever it changes
+  useEffect(() => {
+    if (isLangLoaded) {
+      localStorage.setItem("zikir-lang", lang);
+    }
+  }, [lang, isLangLoaded]);
+
   const decrement = () => {
     triggerHaptic();
     setCount((prevCount) => {
@@ -109,6 +125,9 @@ export default function Home() {
       });
     }
   };
+  if (!isLangLoaded) {
+    return <div className="min-h-screen bg-background" />;
+  }
   return (
     <main dir={t.dir} className={t.font}>
       <Header lang={lang} setLang={setLang} resetCounts={resetCounts} />
