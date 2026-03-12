@@ -10,30 +10,31 @@ import { useWindowSize } from "react-use";
 export default function Home() {
   const [lang, setLang] = useState("en");
   const t = translations[lang];
-  const [count, setCount] = useState(() => {
-    if (typeof window !== undefined) {
-      const saved = localStorage.getItem("zikir-counts");
-      return saved
-        ? JSON.parse(saved)
-        : {
-            SubhanAllah: 0,
-            Alhamdulillah: 0,
-            "La ilaha illallah": 0,
-            "Allahu Akbar": 0,
-          };
-    }
-    //default for server-side rendering
-    return {
-      SubhanAllah: 0,
-      Alhamdulillah: 0,
-      "La ilaha illallah": 0,
-      "Allahu Akbar": 0,
-    };
+  const [count, setCount] = useState({
+    SubhanAllah: 0,
+    Alhamdulillah: 0,
+    "La ilaha illallah": 0,
+    "Allahu Akbar": 0,
   });
-  //save to localStorage whenEver count changes:
+
+  // Add a "isLoaded" check to prevent flickering
+  const [isLoaded, setIsLoaded] = useState(false);
+  // load from local storage (runs only on mount)
   useEffect(() => {
-    localStorage.setItem("zikir-counts", JSON.stringify(count));
-  }, [count]);
+    const saved = localStorage.getItem("zikir-counts");
+    if (saved) {
+      setCount(JSON.parse(saved));
+    }
+    setIsLoaded(true);
+  }, []);
+
+  //save to localStorage whenever count changes:
+  useEffect(() => {
+    if (isLoaded) {
+      // Only save after we've finished loading
+      localStorage.setItem("zikir-counts", JSON.stringify(count));
+    }
+  }, [count, isLoaded]);
   const [activeZikirs, setActiveZikirs] = useState([]);
   const decrement = () => {
     setCount((prevCount) => {
@@ -82,7 +83,8 @@ export default function Home() {
   };
   //reset all count from header component
   const resetCounts = () => {
-    if (confirm("Are you sure you want to reset all counts?")) {
+    const confirmReset = window.confirm("Reset all counts?");
+    if (confirmReset) {
       setCount({
         SubhanAllah: 0,
         Alhamdulillah: 0,

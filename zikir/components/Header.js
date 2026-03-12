@@ -1,6 +1,7 @@
 import React from "react";
 import { Field } from "@/components/ui/field";
 import { Button } from "./ui/button";
+import { RotateCcw } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -15,7 +16,7 @@ const Header = ({ lang, setLang, resetCounts }) => {
       <h1 className="font-orbitron font-bold text-2xl p-2 tracking-widest">
         ZIKIR
       </h1>
-      <div className="flex gap-2">
+      <div className="flex gap-4 items-center">
         <Field className="w-full max-w-37.5 mr-2">
           <Select value={lang} onValueChange={setLang}>
             <SelectTrigger className="rounded-2xl border-none bg-transparent hover:bg-black/5 transition-colors">
@@ -33,11 +34,11 @@ const Header = ({ lang, setLang, resetCounts }) => {
           </Select>
         </Field>
         <Button
-          className="rounded-4xl"
-          variant="destructive"
+          className="rounded-full  hover:bg-red-100 hover:text-red-600 transition-colors"
+          variant="ghost"
           onClick={() => resetCounts()}
         >
-          Reset
+          <RotateCcw size={20} />
         </Button>
       </div>
     </div>
