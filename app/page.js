@@ -159,7 +159,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="zikirs flex justify-around">
+      <div className="zikirs flex flex-wrap justify-center gap-4 px-4">
         <Zikir
           id="SubhanAllah"
           count={formatNumber(count["SubhanAllah"])}
