@@ -15,6 +15,7 @@ export const translations = {
     hadithBody:
       "Say 'SubhanAllah' 100 times: It is equivalent to freeing 100 slaves from the offspring of Isma'il. Say 'Alhamdulillah' 100 times: It is equivalent to 100 horses, saddled and bridled, carrying [fighters] in the way of Allah. Say 'Allahu Akbar' 100 times: It is equivalent to 100 sacrificial camels, decorated and accepted [by Allah]. Say 'La ilaha illallah' 100 times: it fills what is between the heavens and the earth, and on that day, no one will have a better deed raised for them than yours, except for one who does the same as you.'",
     hadithSource: "— (Source: Musnad Ahmad and Silsila al-Sahiha by Al-Albani)",
+    selectZikir: "Select a Zikir to begin",
   },
   ar: {
     name: "العربية",
@@ -32,6 +33,7 @@ export const translations = {
     hadithBody:
       "سَبِّحِي اللَّهَ مِائَةَ تَسْبِيحَةٍ فَإِنَّهَا تَعْدِلُ لَكِ مِائَةَ رَقَبَةٍ مُعْتَقَةٍ مِنْ وَلَدِ إِسْمَاعِيلَ، وَاحْمَدِي اللَّهَ مِائَةَ تَحْمِيدَةٍ فَإِنَّهَا تَعْدِلُ لَكِ مِائَةَ فَرَسٍ مُسْرَجَةٍ مُلْجَمَةٍ تَحْمِلِينَ عَلَيْهَا فِي سَبِيلِ اللَّهِ، وَكَبِّرِي اللَّهَ مِائَةَ تَكْبِيرَةٍ فَإِنَّهَا تَعْدِلُ لَكِ مِائَةَ بَدَنَةٍ مُقَلَّدَةٍ مُتَقَبَّلَةٍ، وَهَلِّلِي اللَّهَ مِائَةَ تَهْلِيلَةٍ تَمْلأُ مَا بَيْنَ السَّمَاءِ وَالأَرْضِ، وَلا يُرْفَعُ لأَحَدٍ يَوْمَئِذٍ عَمَلٌ أَفْضَلُ مِمَّا يُرْفَعُ لَكِ إِلا أَنْ يَأْتِيَ بِمِثْلِ مَا أَتَيْتِ بِهِ.",
     hadithSource: "— (المصدر: مسند أحمد والسلسلة الصحيحة للألباني)",
+    selectZikir: "اختر ذكراً للبدء",
   },
   bn: {
     name: "বাংলা",
@@ -49,6 +51,7 @@ export const translations = {
     hadithBody:
       "১০০ বার 'সুবহানাল্লাহ' পাঠ করো: এটি ইসমাইল (আ.)-এর বংশধরের ১০০ জন গোলামকে মুক্ত করার সমান সওয়াব। ১০০ বার 'আলহামদুলিল্লাহ' পাঠ করো: এটি আল্লাহর রাস্তায় জিহাদের জন্য জিন ও লাগামসহ সজ্জিত ১০০টি ঘোড়ার সমান। ১০০ বার 'আল্লাহু আকবার' পাঠ করো: এটি কবুলযোগ্য ১০০টি কোরবানির উটের সমান। ১০০ বার 'লা ইলাহা ইল্লাল্লাহ' পাঠ করো: এটি আসমান ও জমিনের মধ্যবর্তী স্থান পূর্ণ করে দেয় এবং সেদিন তোমার চেয়ে বেশি সওয়াব আর কেউ পাবে না, যদি না সে তোমার মতো আমল করে।",
     hadithSource: "— (উৎস: মুসনাদে আহমদ এবং সিলসিলাহ আস-সহীহাহ)",
+    selectZikir: "শুরু করতে একটি জিকির নির্বাচন করুন",
   },
   ur: {
     name: "اردو",
@@ -66,6 +69,7 @@ export const translations = {
     hadithBody:
       "سو مرتبہ 'سبحان اللہ' کہو: یہ اولادِ اسماعیل سے سو غلام آزاد کرنے کے برابر ہے۔ سو مرتبہ 'الحمد للہ' کہو: یہ اللہ کی راہ میں سو لجام والے گھوڑوں پر سواری کے برابر ہے۔ سو مرتبہ 'اللہ اکبر' کہو: یہ سو مقبول قربانی کے اونٹوں کے برابر ہے۔ اور سو مرتبہ 'لا الہ الا اللہ' کہو: یہ زمین و آسمان کے درمیان خلا کو بھر دیتا ہے، اور اس دن کسی کا عمل تم سے بہتر نہیں ہوگا سوائے اس کے جو تمہارے جیسا عمل کرے۔",
     hadithSource: "— (ماخذ: مسند احمد اور سلسلہ الاحادیث الصحيحہ)",
+    selectZikir: "شروع کرنے کے لیے ذکر منتخب کریں",
   },
   tr: {
     name: "Türkçe",
@@ -83,5 +87,6 @@ export const translations = {
     hadithBody:
       "100 defa 'Sübhânallah' de: Bu, İsmail (a.s.) soyundan 100 köle azat etmeye bedeldir. 100 defa 'Elhamdülillâh' de: Bu, Allah yolunda eyerlenmiş ve gemlenmiş 100 ata binip cihat etmeye bedeldir. 100 defa 'Allâhu Ekber' de: Bu, süslenmiş ve kabul edilmiş 100 kurbanlık deveye bedeldir. 100 defa 'Lâ ilâhe illallâh' de: Bu, gök ile yer arasını doldurur ve o gün senden daha fazlasını yapan hariç, kimseden senin amelinden daha üstün bir amel kabul edilmez.",
     hadithSource: "— (Kaynak: Müsned-i Ahmed ve Silsile-i Sahiha)",
+    selectZikir: "Başlamak için bir zikir seçin",
   },
 };

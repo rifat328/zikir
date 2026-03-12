@@ -199,6 +199,13 @@ export default function Home() {
           syncLable={t.syncing}
         />
       </div>
+      {totalCount < 1 && (
+        <div className="flex justify-center items-center">
+          <h2 className="p-2 m-2 rounded-2xl bg-white/50  backdrop-blur-md shadow-lg animate-bounce">
+            ⬆️ {t.selectZikir}⬆️
+          </h2>
+        </div>
+      )}
       <div className="hadith mt-12 mx-auto flex flex-col justify-center items-center text-center max-w-[75ch] lg:max-w-[45%] px-4">
         <h2 className="font-bold text-2xl mb-4">{t.hadithTitle}</h2>
         <p className="text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed text-muted-foreground">
