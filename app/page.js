@@ -111,7 +111,13 @@ export default function Home() {
 
   // This turns the number 5 into "৫" if lang is "bn"
   const formatNumber = (num) => {
-    return new Intl.NumberFormat(t.locale).format(num);
+    const currentLocale = t.locale;
+
+    // Define options only if we need to force Urdu digits
+    const options =
+      currentLocale === "ur-PK" ? { numberingSystem: "arabext" } : {};
+
+    return new Intl.NumberFormat(currentLocale, options).format(num);
   };
   //reset all count from header component
   const resetCounts = () => {
