@@ -1,6 +1,7 @@
 # 📿 Zikir Counter
 
 A modern, minimalist, and highly localized digital Tasbih built with Next.js and Tailwind CSS v4. This app is designed for spiritual focus, featuring multi-language support, persistent progress, and tactile haptic feedback.
+[🚀 Live Demo](https://zikir-beta.vercel.app/)
 
 ## ✨ Features
 

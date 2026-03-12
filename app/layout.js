@@ -23,7 +23,7 @@ const orbitronEnglish = Orbitron({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://your-app-url.vercel.app"),
+  metadataBase: new URL("https://zikir-beta.vercel.app/"),
   title: "Zikir Counter | Digital Tasbih",
   description:
     "A minimalist, multi-language digital tasbih for your daily Zikir.",
@@ -31,7 +31,7 @@ export const metadata = {
     title: "Zikir Counter",
     description:
       "Multi-language support, haptic feedback, and progress tracking.",
-    url: "https://your-app-url.vercel.app",
+    url: "https://zikir-beta.vercel.app/",
     siteName: "Zikir Counter",
     images: [
       {
