@@ -80,9 +80,20 @@ export default function Home() {
   const formatNumber = (num) => {
     return new Intl.NumberFormat(t.locale).format(num);
   };
+  //reset all count from header component
+  const resetCounts = () => {
+    if (confirm("Are you sure you want to reset all counts?")) {
+      setCount({
+        SubhanAllah: 0,
+        Alhamdulillah: 0,
+        "La ilaha illallah": 0,
+        "Allahu Akbar": 0,
+      });
+    }
+  };
   return (
     <main dir={t.dir} className={t.font}>
-      <Header lang={lang} setLang={setLang} />
+      <Header lang={lang} setLang={setLang} resetCounts={resetCounts} />
 
       {showConfetti && <Confetti width={windowWidth} height={windowHeight} />}
       <div className="counter-wraper flex justify-center items-center">
