@@ -7,6 +7,7 @@ import Zikir from "@/components/Zikir";
 import { translations } from "@/translations.js";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
+import { triggerHaptic } from "@/hapticFeedback";
 export default function Home() {
   const [lang, setLang] = useState("en");
   const t = translations[lang];
@@ -16,6 +17,7 @@ export default function Home() {
     "La ilaha illallah": 0,
     "Allahu Akbar": 0,
   });
+  const [activeZikirs, setActiveZikirs] = useState([]);
 
   // Add a "isLoaded" check to prevent flickering
   const [isLoaded, setIsLoaded] = useState(false);
@@ -35,8 +37,9 @@ export default function Home() {
       localStorage.setItem("zikir-counts", JSON.stringify(count));
     }
   }, [count, isLoaded]);
-  const [activeZikirs, setActiveZikirs] = useState([]);
+
   const decrement = () => {
+    triggerHaptic();
     setCount((prevCount) => {
       const next = { ...prevCount };
       activeZikirs.forEach((name) => {
@@ -46,6 +49,10 @@ export default function Home() {
     });
   };
   const increment = () => {
+    triggerHaptic();
+    if (totalCount + (1 % 100) === 0) {
+      window.navigator.vibrate([30, 30, 30]);
+    }
     setCount((prevCount) => {
       const next = { ...prevCount };
       activeZikirs.forEach((name) => {
@@ -66,16 +73,25 @@ export default function Home() {
   const totalCount = Object.values(count).reduce((acc, num) => acc + num, 0);
   const { windowWidth, windowHeight } = useWindowSize();
   const [showConfetti, setShowConfetti] = useState(false);
+  const [hasCelebrated, setHasCelebrated] = useState(false);
   useEffect(() => {
-    if (totalCount >= 400) {
+    if (totalCount >= 400 && !hasCelebrated) {
+      if (window.navigator.vibrate) {
+        //complex vibration pattern: vibrate 100ms, pause 50ms, vibrate 100ms
+        window.navigator.vibrate([100, 50, 100]);
+      }
       setShowConfetti(true);
+      setHasCelebrated(true); // gate lock so 400 upward doesnt vibrate continiously
       //stop the confetti after 10 sec
       const timer = setTimeout(() => {
         setShowConfetti(false);
       }, 10000);
       return () => clearTimeout(timer);
     }
-  }, [totalCount]);
+    if (totalCount === 0) {
+      setHasCelebrated(false);
+    }
+  }, [totalCount, hasCelebrated]);
 
   // This turns the number 5 into "৫" if lang is "bn"
   const formatNumber = (num) => {
