@@ -1,9 +1,9 @@
 import React from "react";
 import { cn } from "@/lib/utils";
-const Zikir = ({ name, count, isActive, onToggle }) => {
+const Zikir = ({ id, name, count, isActive, onToggle, syncLable }) => {
   return (
     <div
-      onClick={() => onToggle(name)}
+      onClick={() => onToggle(id)}
       className={cn(
         "flex flex-col p-4 mb-2 rounded-4xl cursor-pointer transition-all border-2 ", // Changed to flex-col
         isActive
@@ -35,7 +35,7 @@ const Zikir = ({ name, count, isActive, onToggle }) => {
           {" "}
           {/* Aligns it under the name, past the count circle */}
           <p className="text-[9px] uppercase tracking-widest text-primary/70 animate-pulse">
-            ● Syncing with main counter
+            ● {syncLable}
           </p>
         </div>
       )}

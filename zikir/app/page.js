@@ -1,11 +1,15 @@
 "use client";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import Header from "@/components/Header";
 import { Plus, Minus } from "lucide-react";
 import Zikir from "@/components/Zikir";
+import { translations } from "@/translations.js";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
 export default function Home() {
+  const [lang, setLang] = useState("en");
+  const t = translations[lang];
   const [count, setCount] = useState({
     SubhanAllah: 0,
     Alhamdulillah: 0,
@@ -53,8 +57,15 @@ export default function Home() {
       return () => clearTimeout(timer);
     }
   }, [totalCount]);
+
+  // This turns the number 5 into "৫" if lang is "bn"
+  const formatNumber = (num) => {
+    return new Intl.NumberFormat(t.locale).format(num);
+  };
   return (
-    <main>
+    <main dir={t.dir} className={t.font}>
+      <Header lang={lang} setLang={setLang} />
+
       {showConfetti && <Confetti width={windowWidth} height={windowHeight} />}
       <div className="counter-wraper flex justify-center items-center">
         <div className="counter mt-4 w-90 h-90 flex justify-center items-center">
@@ -70,7 +81,7 @@ export default function Home() {
             key={totalCount}
             className="w-38 h-38 p-1 -mx-4 rounded-full z-10 bg-accent font-orbitron font-medium flex justify-center items-center text-6xl animate-pop"
           >
-            {totalCount}
+            {formatNumber(totalCount)}
           </h2>
 
           <Button
@@ -84,32 +95,40 @@ export default function Home() {
 
       <div className="zikirs flex justify-around">
         <Zikir
-          count={count["SubhanAllah"]}
-          name="SubhanAllah"
+          id="SubhanAllah"
+          count={formatNumber(count["SubhanAllah"])}
+          name={t.subhanAllah}
           isActive={activeZikirs.includes("SubhanAllah")}
           onToggle={handleToggle}
+          syncLable={t.syncing}
         />
         <Zikir
-          count={count["Alhamdulillah"]}
-          name="Alhamdulillah"
+          id="Alhamdulillah"
+          count={formatNumber(count["Alhamdulillah"])}
+          name={t.alhamdulillah}
           isActive={activeZikirs.includes("Alhamdulillah")}
           onToggle={handleToggle}
+          syncLable={t.syncing}
         />
         <Zikir
-          count={count["La ilaha illallah"]}
-          name="La ilaha illallah"
+          id="La ilaha illallah"
+          count={formatNumber(count["La ilaha illallah"])}
+          name={t.lailaha}
           isActive={activeZikirs.includes("La ilaha illallah")}
           onToggle={handleToggle}
+          syncLable={t.syncing}
         />
         <Zikir
-          count={count["Allahu Akbar"]}
-          name="Allahu Akbar"
+          id="Allahu Akbar"
+          count={formatNumber(count["Allahu Akbar"])}
+          name={t.allahuAkbar}
           isActive={activeZikirs.includes("Allahu Akbar")}
           onToggle={handleToggle}
+          syncLable={t.syncing}
         />
       </div>
       <div className="hadith mt-12 mx-auto flex flex-col justify-center items-center text-center max-w-[75ch] lg:max-w-[45%] px-4">
-        <h2 className="font-bold text-2xl mb-4">The Hadith</h2>
+        <h2 className="font-bold text-2xl mb-4">{t.hadithTitle}</h2>
         <p className="text-sm md:text-base lg:text-lg xl:text-xl leading-relaxed text-muted-foreground">
           Umm hani Bint abu talib , The sister of Ali and the cousin of the
           Prophet (SA), Came to him and said O Prophet of Allah, Now I am Old
