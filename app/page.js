@@ -13,26 +13,8 @@ export default function Home() {
   const t = translations[lang];
 
   const [activeZikirs, setActiveZikirs] = useState([]);
-  const { count, totalCount, increment, decrement } = useZikir(activeZikirs);
-
-  // Add a "isLoaded" check to prevent flickering
-  const [isLoaded, setIsLoaded] = useState(false);
-  // load from local storage (runs only on mount)
-  useEffect(() => {
-    const saved = localStorage.getItem("zikir-counts");
-    if (saved) {
-      setCount(JSON.parse(saved));
-    }
-    setIsLoaded(true);
-  }, []);
-
-  //save to localStorage whenever count changes:
-  useEffect(() => {
-    if (isLoaded) {
-      // Only save after we've finished loading
-      localStorage.setItem("zikir-counts", JSON.stringify(count));
-    }
-  }, [count, isLoaded]);
+  const { count, totalCount, increment, decrement, resetCountAll } =
+    useZikir(activeZikirs);
 
   // Save Language preferance on to local Storage
   const [isLangLoaded, setIsLangLoaded] = useState(false);
@@ -92,24 +74,13 @@ export default function Home() {
 
     return new Intl.NumberFormat(currentLocale, options).format(num);
   };
-  //reset all count from header component
-  const resetCounts = () => {
-    const confirmReset = window.confirm("Reset all counts?");
-    if (confirmReset) {
-      setCount({
-        SubhanAllah: 0,
-        Alhamdulillah: 0,
-        "La ilaha illallah": 0,
-        "Allahu Akbar": 0,
-      });
-    }
-  };
+
   if (!isLangLoaded) {
     return <div className="min-h-screen bg-background" />;
   }
   return (
     <main dir={t.dir} className={t.font}>
-      <Header lang={lang} setLang={setLang} resetCounts={resetCounts} />
+      <Header lang={lang} setLang={setLang} resetCounts={resetCountAll} />
 
       {showConfetti && <Confetti width={windowWidth} height={windowHeight} />}
       <div className="counter-wraper flex justify-center items-center">
