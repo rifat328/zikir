@@ -7,17 +7,13 @@ import Zikir from "@/components/Zikir";
 import { translations } from "@/translations.js";
 import Confetti from "react-confetti";
 import { useWindowSize } from "react-use";
-import { triggerHaptic } from "@/hapticFeedback";
+import { useZikir } from "@/utility/customHooks/useZikir";
 export default function Home() {
   const [lang, setLang] = useState("en");
   const t = translations[lang];
-  const [count, setCount] = useState({
-    SubhanAllah: 0,
-    Alhamdulillah: 0,
-    "La ilaha illallah": 0,
-    "Allahu Akbar": 0,
-  });
+
   const [activeZikirs, setActiveZikirs] = useState([]);
+  const { count, totalCount, increment, decrement } = useZikir(activeZikirs);
 
   // Add a "isLoaded" check to prevent flickering
   const [isLoaded, setIsLoaded] = useState(false);
@@ -54,29 +50,6 @@ export default function Home() {
     }
   }, [lang, isLangLoaded]);
 
-  const decrement = () => {
-    triggerHaptic();
-    setCount((prevCount) => {
-      const next = { ...prevCount };
-      activeZikirs.forEach((name) => {
-        next[name] = Math.max(0, next[name] - 1);
-      });
-      return next;
-    });
-  };
-  const increment = () => {
-    triggerHaptic();
-    if (totalCount + (1 % 100) === 0) {
-      window.navigator.vibrate([30, 30, 30]);
-    }
-    setCount((prevCount) => {
-      const next = { ...prevCount };
-      activeZikirs.forEach((name) => {
-        next[name] = next[name] + 1;
-      });
-      return next;
-    });
-  };
   const handleToggle = (name) => {
     const isAlreadyActive = activeZikirs.includes(name);
     if (isAlreadyActive) {
@@ -86,7 +59,7 @@ export default function Home() {
       setActiveZikirs([...activeZikirs, name]);
     }
   };
-  const totalCount = Object.values(count).reduce((acc, num) => acc + num, 0);
+
   const { windowWidth, windowHeight } = useWindowSize();
   const [showConfetti, setShowConfetti] = useState(false);
   const [hasCelebrated, setHasCelebrated] = useState(false);
